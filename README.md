@@ -13,7 +13,9 @@ https://<AWS_LINK>.amazonaws.com/dev/simple
 
 Use POST request with attached binary helm chart in the body and AssetKind (HELM_PACKAGE or HELM_PROVENANCE) as header.
 You should get json with helm attributes:
-`{
+
+```json
+{
    "attributesEnumMap": {
      "DESCRIPTION": "A Distributed JMeter Helm chart",
      "HOME": "http://jmeter.apache.org/",
@@ -31,4 +33,5 @@ You should get json with helm attributes:
      ],
      "VERSION": "1.0.1"
    }
- }`
+ }
+ ```
