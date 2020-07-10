@@ -16,22 +16,7 @@ You should get json with helm attributes:
 
 ```json
 {
-   "attributesEnumMap": {
-     "DESCRIPTION": "A Distributed JMeter Helm chart",
-     "HOME": "http://jmeter.apache.org/",
-     "ICON": "http://jmeter.apache.org/images/logo.svg",
-     "APP_VERSION": "3.3",
-     "MAINTAINERS": [
-       {
-         "email": "pedrocesar.ti@gmail.com",
-         "name": "pedrocesar-ti"
-       }
-     ],
-     "NAME": "distributed-jmeter",
-     "SOURCES": [
-       "https://github.com/pedrocesar-ti/distributed-jmeter-docker"
-     ],
-     "VERSION": "1.0.1"
-   }
- }
+  "name": "distributed-jmeter",
+  "version": "1.0.1"
+}
  ```

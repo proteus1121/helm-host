@@ -25,6 +25,7 @@ public class Handler
   @Override
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
     String assetKindHeader = input.getHeaders().get(AssetKind.NAME);
+    System.out.println(input.getHeaders());
     if (assetKindHeader == null) {
       //todo AssertKindValidator
       throw new IllegalArgumentException("Header [" + AssetKind.NAME + "] is absent. Possible values: " +
@@ -37,8 +38,10 @@ public class Handler
     HelmAttributes attributes =
         helmAttributeParser.getAttributes(assetKind, new ByteArrayInputStream(Base64.getDecoder().decode(input.getBody())));
 
+    FlexConfig config = new FlexConfig(attributes.getName(), attributes.getVersion(), null);
+
     APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
-    responseEvent.setBody(gson.toJson(attributes));
+    responseEvent.setBody(gson.toJson(config));
     responseEvent.setStatusCode(200);
 
     return responseEvent;
