@@ -15,8 +15,11 @@ package:
 
 functions:
   simpleHttp:
-    handler: com.ishchenko.artem.helm.main.Handler
+    handler: com.ishchenko.artem.helm.StreamLambdaHandler::handleRequest
     events:
+      - http:
+          method: GET
+          path: /
       - http:
           method: POST
           path: /simple
