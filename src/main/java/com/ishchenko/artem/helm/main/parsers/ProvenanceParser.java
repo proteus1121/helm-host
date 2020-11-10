@@ -1,4 +1,4 @@
-package com.ishchenko.artem.helm.parsers;/*
+package com.ishchenko.artem.helm.main.parsers;/*
  * Sonatype Nexus (TM) Open Source Version
  * Copyright (c) 2018-present Sonatype, Inc.
  * All rights reserved. Includes the third-party code listed at http://links.sonatype.com/products/nexus/oss/attributions.
@@ -11,13 +11,13 @@ package com.ishchenko.artem.helm.parsers;/*
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
 
+import com.ishchenko.artem.helm.main.model.HelmAttributes;
+import com.ishchenko.artem.helm.main.model.HelmProperties;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import com.ishchenko.artem.helm.main.HelmAttributes;
-import com.ishchenko.artem.helm.main.HelmProperties;
 
 /**
  * @since 1.0.0

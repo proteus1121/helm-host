@@ -1,10 +1,11 @@
-package com.ishchenko.artem.helm.parsers;
+package com.ishchenko.artem.helm.main.parsers;
 
+import com.ishchenko.artem.helm.main.model.AssetKind;
+import com.ishchenko.artem.helm.main.model.HelmAttributes;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.ishchenko.artem.helm.main.AssetKind;
-import com.ishchenko.artem.helm.main.HelmAttributes;
 
 public class HelmAttributeParser
 {
@@ -24,14 +25,16 @@ public class HelmAttributeParser
     this.provenanceParser = provenanceParser;
   }
 
-  public HelmAttributes getAttributes(final AssetKind assetKind, final InputStream inputStream) throws IOException {
-    switch (assetKind) {
-      case HELM_PACKAGE:
-        return getAttributesFromInputStream(inputStream);
-      case HELM_PROVENANCE:
-        return getAttributesProvenanceFromInputStream(inputStream);
-      default:
-        return new HelmAttributes();
+  public HelmAttributes getAttributes(final AssetKind assetKind, final byte[] bytes) throws IOException {
+    try (InputStream is = new ByteArrayInputStream(bytes)) {
+      switch (assetKind) {
+        case HELM_PACKAGE:
+          return getAttributesFromInputStream(is);
+        case HELM_PROVENANCE:
+          return getAttributesProvenanceFromInputStream(is);
+        default:
+          return new HelmAttributes();
+      }
     }
   }
 

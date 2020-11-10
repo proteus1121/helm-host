@@ -1,4 +1,4 @@
-package com.ishchenko.artem.helm.parsers;/*
+package com.ishchenko.artem.helm.main.parsers;/*
  * Sonatype Nexus (TM) Open Source Version
  * Copyright (c) 2018-present Sonatype, Inc.
  * All rights reserved. Includes the third-party code listed at http://links.sonatype.com/products/nexus/oss/attributions.
@@ -11,10 +11,6 @@ package com.ishchenko.artem.helm.parsers;/*
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.commons.io.IOUtils;
@@ -25,6 +21,10 @@ import org.yaml.snakeyaml.error.YAMLException;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 import org.yaml.snakeyaml.representer.Representer;
 import org.yaml.snakeyaml.resolver.Resolver;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

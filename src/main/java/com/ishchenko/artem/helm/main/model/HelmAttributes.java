@@ -1,4 +1,4 @@
-package com.ishchenko.artem.helm.main;
+package com.ishchenko.artem.helm.main.model;
 
 import java.util.EnumMap;
 import java.util.List;
