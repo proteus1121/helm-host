@@ -1,4 +1,4 @@
-package com.ishchenko.artem.helm.parsers;/*
+package com.ishchenko.artem.helm.main.parsers;/*
  * Sonatype Nexus (TM) Open Source Version
  * Copyright (c) 2018-present Sonatype, Inc.
  * All rights reserved. Includes the third-party code listed at http://links.sonatype.com/products/nexus/oss/attributions.
@@ -11,14 +11,13 @@ package com.ishchenko.artem.helm.parsers;/*
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Utility methods for working with tgz files

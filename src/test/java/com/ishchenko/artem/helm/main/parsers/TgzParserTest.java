@@ -1,12 +1,12 @@
-package com.ishchenko.artem.helm.parsers;
+package com.ishchenko.artem.helm.main.parsers;
+
+import com.google.common.io.Resources;
+import com.ishchenko.artem.helm.main.model.HelmAttributes;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.google.common.io.Resources;
-import com.ishchenko.artem.helm.main.HelmAttributes;
-import org.junit.Assert;
-import org.junit.Test;
 
 public class TgzParserTest
 {

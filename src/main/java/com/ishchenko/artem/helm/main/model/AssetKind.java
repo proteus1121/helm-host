@@ -1,4 +1,4 @@
-package com.ishchenko.artem.helm.main;
+package com.ishchenko.artem.helm.main.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
