@@ -11,14 +11,6 @@ provider:
   apiGateway:
     binaryMediaTypes:
       - '*/*'
-#  iamRoleStatem Zents:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:*"
-#      Resource: "arn:aws:s3:::${self:custom.properties.BUCKET}/*"
-#  s3:
-#    bucketOne:
-#      name: ${self:custom.properties.BUCKET}
 
 package:
   artifact: target/helm.host-1.0-SNAPSHOT.jar
