@@ -80,7 +80,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <!--  ${springsecurity.version} from aws-serverless-java-container-springboot2   -->
+      <!--  ${spring.version} from aws-serverless-java-container-springboot2   -->
       <version>2.2.6.RELEASE</version>
       <scope>test</scope>
     </dependency>
@@ -150,6 +150,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
       <version>2.3.1.RELEASE</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.5.2</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/io.symphonia/lambda-logging -->
     <dependency>
