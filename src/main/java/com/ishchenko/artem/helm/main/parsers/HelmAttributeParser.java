@@ -2,11 +2,14 @@ package com.ishchenko.artem.helm.main.parsers;
 
 import com.ishchenko.artem.helm.main.model.AssetKind;
 import com.ishchenko.artem.helm.main.model.HelmAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Service
 public class HelmAttributeParser
 {
   private TgzParser tgzParser;
@@ -15,6 +18,7 @@ public class HelmAttributeParser
 
   private ProvenanceParser provenanceParser;
 
+  @Autowired
   public HelmAttributeParser(
       final TgzParser tgzParser,
       final YamlParser yamlParser,

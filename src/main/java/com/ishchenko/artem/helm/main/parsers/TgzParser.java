@@ -14,16 +14,16 @@ package com.ishchenko.artem.helm.main.parsers;/*
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Utility methods for working with tgz files
- *
- * @since 0.0.1
+ * Service for working with tgz files
  */
+@Service
 public class TgzParser
 {
   private static final String CHART_NAME = "Chart.yaml";

@@ -11,101 +11,59 @@ package com.ishchenko.artem.helm.main.parsers;/*
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.apache.commons.io.IOUtils;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.error.YAMLException;
-import org.yaml.snakeyaml.reader.UnicodeReader;
-import org.yaml.snakeyaml.representer.Representer;
-import org.yaml.snakeyaml.resolver.Resolver;
+import com.ishchenko.artem.helm.main.model.ChartIndex;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UncheckedIOException;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Utility methods for getting attributes from yaml files, writing to yaml files
- *
- * @since 0.0.1
+ * Service for getting attributes from yaml files, writing to yaml files
  */
+@Service
 public class YamlParser
 {
-  private static final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+  private ObjectMapper mapper;
+
+  @Autowired
+  public YamlParser(@Qualifier("helm") ObjectMapper mapper) {
+    this.mapper = mapper;
+  }
+
+  private static final TypeReference<Map<String, Object>> MAP_TYPE_REFERENCE
+          = new TypeReference<Map<String, Object>>() { };
 
   public Map<String, Object> load(InputStream is) throws IOException {
     checkNotNull(is);
-    String data = IOUtils.toString(new UnicodeReader(is));
-
-    Map<String, Object> map;
-
-    try {
-      Yaml yaml = new Yaml(new Constructor(), new Representer(),
-          new DumperOptions(), new Resolver());
-      map = yaml.load(data);
-    }
-    catch (YAMLException e) {
-      map = (Map<String, Object>) mapper.readValue(data, Map.class);
-    }
-    return map;
+    return mapper.readValue(is, MAP_TYPE_REFERENCE);
   }
 
-  //private class JodaPropertyConstructor extends Constructor {
-  //  public JodaPropertyConstructor() {
-  //    yamlClassConstructors.put(NodeId.scalar, new TimeStampConstruct());
-  //  }
-  //
-  //  class TimeStampConstruct extends Constructor.ConstructScalar {
-  //    @Override
-  //    public Object construct(Node nnode) {
-  //      if (nnode.getTag().toString().equals("tag:yaml.org,2002:timestamp")) {
-  //        Construct dateConstructor = yamlConstructors.get(Tag.TIMESTAMP);
-  //        Date date = (Date) dateConstructor.construct(nnode);
-  //        return new DateTime(date, DateTimeZone.UTC);
-  //      } else {
-  //        return super.construct(nnode);
-  //      }
-  //    }
-  //  }
-  //}
-  //
-  ///**
-  // * Necessary to output Joda DateTime correctly with Snakey Yamls
-  // * See: https://bitbucket.org/asomov/snakeyaml/wiki/Howto#markdown-header-how-to-parse-jodatime
-  // */
-  //class JodaTimeRepresenter extends Representer {
-  //  public JodaTimeRepresenter() {
-  //    multiRepresenters.put(DateTime.class, new RepresentJodaDateTime());
-  //  }
-  //
-  //  /**
-  //   * Prevents writing null values out to index.yaml, not a part of JodaTimeRepresenter necessarily
-  //   * but included here as we are setting up a {@link Representer}
-  //   */
-  //  @Override
-  //  protected NodeTuple representJavaBeanProperty(Object javaBean,
-  //                                                Property property,
-  //                                                Object propertyValue,
-  //                                                Tag customTag)
-  //  {
-  //    // if value of property is null, ignore it.
-  //    if (propertyValue == null) {
-  //      return null;
-  //    }
-  //    else {
-  //      return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
-  //    }
-  //  }
-  //
-  //  private class RepresentJodaDateTime extends RepresentDate {
-  //    public Node representData(Object data) {
-  //      DateTime date = (DateTime) data;
-  //      return super.representData(new Date(date.getMillis()));
-  //    }
-  //  }
-  //}
+  public String getYamlContent(final ChartIndex index) {
+    try {
+      return mapper.writeValueAsString(index);
+    }
+    catch (IOException ex) {
+      throw new UncheckedIOException(ex);
+    }
+  }
+
+  public void write(final OutputStream os, final ChartIndex index) {
+    try (OutputStreamWriter writer = new OutputStreamWriter(os)) {
+      String result = getYamlContent(index);
+      writer.write(result);
+    }
+    catch (IOException ex) {
+      throw new UncheckedIOException(ex);
+    }
+  }
 }
